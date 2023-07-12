@@ -2,15 +2,17 @@ package com.example.calculator;
 
 import com.example.calculator.Controller.ProductController;
 import com.example.calculator.Controller.SumController;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.constraints.PositiveOrZero;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(controllers = SumController.class)
 public class CalculatorApplicationTests {
 
     @Test
@@ -23,14 +25,6 @@ public class CalculatorApplicationTests {
         List<Integer> input = Arrays.asList(5, 7);
         assertEquals(12, calculatorController.sum(input));
     }
-
-//    @Test //(expected = ConstraintViolationException.class)
-//    public void testSumConstraintViolation(){
-//        SumController calculatorController = new SumController();
-//        List<@PositiveOrZero Integer> input = Arrays.asList(5, -1);
-//        assertThrows(ConstraintViolationException.class, ()->calculatorController.sum(input));
-////        calculatorController.sum(new ArrayList<@PositiveOrZero Integer>(Arrays.asList(5, -1)));
-//    }
 
     @Test
     public void testProductCorrect(){
