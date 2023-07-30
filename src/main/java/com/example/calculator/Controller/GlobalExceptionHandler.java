@@ -4,7 +4,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -57,6 +56,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String>
     handleIllegalArgumentException(IllegalArgumentException e){
+        if(e.getMessage() == null){
+            return new ResponseEntity<>("You may only input 2 numbers", HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>("Invalid input: " + e.getMessage() + " Numbers must be greater than or equal to zero", HttpStatus.BAD_REQUEST);
     }
 

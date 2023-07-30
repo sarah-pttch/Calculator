@@ -12,7 +12,10 @@ import java.util.*;
 public class SumController{
 
     @GetMapping("/sum")
-    public Integer sum(@RequestParam List<@PositiveOrZero Integer> numbers) {
+    public Integer sum(@RequestParam List<@PositiveOrZero Integer> numbers) throws IllegalArgumentException {
+        if(numbers.size() > 2){
+            throw new IllegalArgumentException();
+        }
         return numbers.get(0) + numbers.get(1);
     }
 

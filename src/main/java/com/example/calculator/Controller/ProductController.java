@@ -29,6 +29,10 @@ public class ProductController {
 //            throw new IllegalArgumentException(String.valueOf(optionalInteger.get()));
 //        }
 
+        if(numbers.size() > 2){
+            throw new IllegalArgumentException();
+        }
+
         List<Integer> negativeNumbers = numbers.stream().filter(i -> i < 0).toList();
         if(!negativeNumbers.isEmpty()){
             throw new IllegalArgumentException(negativeNumbers.toString());
