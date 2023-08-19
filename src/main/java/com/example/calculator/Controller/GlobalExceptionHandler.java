@@ -21,27 +21,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String>
     handleConstraintViolationException(ConstraintViolationException e){
-//        String message = e.getMessage();
-//        int first = message.indexOf("[");
-//        int second = message.lastIndexOf("[");
-//        if(first == second){
-//            int error = Integer.parseInt(message.substring(first+1, first+2)) +1;
-//            return new ResponseEntity<>("Number " + error + " invalid: must be greater than or equal to zero", HttpStatus.BAD_REQUEST);
-//        } else {
-//            return new ResponseEntity<>("Both numbers invalid: must be greater than or equal to zero", HttpStatus.BAD_REQUEST);
-//        }
-
-//        Object errorOne = e.getConstraintViolations().iterator().next().getInvalidValue();
-//        if(e.getConstraintViolations().size() == 2) {
-//            Object errorTwo = e.getConstraintViolations().iterator().next().getInvalidValue();
-//            return new ResponseEntity<>("Invalid input: " + errorOne + ", " + errorTwo + ". Must be greater than or equal to zero.", HttpStatus.BAD_REQUEST);
-//        }
 
         List<Object> negativeNumbers = new ArrayList<>();
         for(ConstraintViolation cv : e.getConstraintViolations()){
             negativeNumbers.add(cv.getInvalidValue());
         }
-
         return new ResponseEntity<>("Invalid input: " + negativeNumbers + ". Must be greater than or equal to zero.", HttpStatus.BAD_REQUEST);
     }
 
