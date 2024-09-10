@@ -37,12 +37,12 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void getProduct_whenCalledWithMoreThanTwoParams_thenVerifyControllerReturnsClientError() throws Exception {
+    public void getProduct_whenCalledWithMoreThanTwoParams_thenVerifyControllerReturnsOk() throws Exception {
         mvc.perform(
                 MockMvcRequestBuilders.get("/product?numbers=2,3,4")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isOk());
     }
 
 }
